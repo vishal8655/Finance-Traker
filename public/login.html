@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Finance Tracker</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="auth-shell">
+      <div class="card auth-card">
+        <div class="brand" style="margin-bottom: 20px;">
+          <div class="brand-badge">PF</div>
+          <div class="brand-text">
+            <h1>Finance Tracker</h1>
+            <p>Welcome back</p>
+          </div>
+        </div>
+
+        <h2>Login</h2>
+        <p>Sign in to track your finances with charts, budgets, and insights.</p>
+
+        <form id="loginForm" class="form-grid">
+          <div class="field full">
+            <label for="email">Email</label>
+            <input id="email" type="email" required />
+          </div>
+
+          <div class="field full">
+            <label for="password">Password</label>
+            <input id="password" type="password" required />
+          </div>
+
+          <div class="field full">
+            <button class="button button-primary" type="submit">Login</button>
+          </div>
+        </form>
+
+        <div id="authMessage" class="message"></div>
+        <p>New here? <a href="/register.html">Create an account</a></p>
+        <p class="muted">Demo account after seeding: demo@example.com / password123</p>
+      </div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/auth.js"></script>
+  </body>
+</html>

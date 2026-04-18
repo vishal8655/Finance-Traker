@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Finance Tracker</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="auth-shell">
+      <div class="card auth-card">
+        <div class="brand" style="margin-bottom: 20px;">
+          <div class="brand-badge">PF</div>
+          <div class="brand-text">
+            <h1>Finance Tracker</h1>
+            <p>Create your account</p>
+          </div>
+        </div>
+
+        <h2>Register</h2>
+        <p>Start managing your income, expenses, budgets, and financial insights.</p>
+
+        <form id="registerForm" class="form-grid">
+          <div class="field full">
+            <label for="name">Full Name</label>
+            <input id="name" required />
+          </div>
+
+          <div class="field full">
+            <label for="email">Email</label>
+            <input id="email" type="email" required />
+          </div>
+
+          <div class="field full">
+            <label for="password">Password</label>
+            <input id="password" type="password" minlength="6" required />
+          </div>
+
+          <div class="field full">
+            <button class="button button-primary" type="submit">Create Account</button>
+          </div>
+        </form>
+
+        <div id="authMessage" class="message"></div>
+        <p>Already have an account? <a href="/login.html">Login</a></p>
+      </div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/auth.js"></script>
+  </body>
+</html>
