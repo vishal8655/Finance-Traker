@@ -55,19 +55,19 @@ mountAppShell(`
       <div id="profileMessage" class="message"></div>
     </div>
 
-    <div class="card">
+    <div class="card compact-theme-card">
       <h3>Theme Preferences</h3>
-      <div class="theme-row">
-        <div>
+      <div class="compact-theme-row">
+        <div class="compact-theme-copy">
           <strong>Dark / Light Mode</strong>
-          <div class="muted">Dark mode is the default style for this app.</div>
+          <div class="muted">Switch the app appearance instantly.</div>
         </div>
-        <label class="theme-switch" for="themeToggleInput" aria-label="Toggle dark and light mode">
+        <label class="mini-theme-switch" for="themeToggleInput" aria-label="Toggle dark and light mode">
           <input id="themeToggleInput" type="checkbox" />
-          <span class="theme-switch-track">
-            <span class="theme-switch-scene theme-switch-day-scene"></span>
-            <span class="theme-switch-scene theme-switch-night-scene"></span>
-            <span class="theme-switch-knob"></span>
+          <span class="mini-theme-track">
+            <span class="mini-theme-icon mini-theme-sun">☀</span>
+            <span class="mini-theme-icon mini-theme-moon">☾</span>
+            <span class="mini-theme-thumb"></span>
           </span>
         </label>
       </div>
