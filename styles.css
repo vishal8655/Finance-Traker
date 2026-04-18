@@ -499,6 +499,14 @@ th {
   transition: background 0.28s ease, border-color 0.28s ease;
 }
 
+.mini-theme-track-static {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  background: linear-gradient(180deg, #1b2130 0%, #2c3446 100%);
+}
+
 .mini-theme-thumb {
   position: absolute;
   top: 4px;
@@ -509,6 +517,10 @@ th {
   background: linear-gradient(135deg, #f2f5fb, #cfd8ea);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
   transition: transform 0.28s ease, background 0.28s ease;
+}
+
+.mini-theme-thumb-static {
+  transform: translateX(40px);
 }
 
 .mini-theme-icon {

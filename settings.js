@@ -59,19 +59,14 @@ mountAppShell(`
       <h3>Theme Preferences</h3>
       <div class="compact-theme-row">
         <div class="compact-theme-copy">
-          <strong>Dark / Light Mode</strong>
-          <div class="muted">Switch the app appearance instantly.</div>
+          <strong>Dark Mode</strong>
+          <div class="muted">The app now uses one clean dark theme across every page.</div>
         </div>
-        <label class="mini-theme-switch" for="themeToggleInput" aria-label="Toggle dark and light mode">
-          <input id="themeToggleInput" type="checkbox" />
-          <span class="mini-theme-track">
-            <span class="mini-theme-icon mini-theme-sun">☀</span>
-            <span class="mini-theme-icon mini-theme-moon">☾</span>
-            <span class="mini-theme-thumb"></span>
-          </span>
-        </label>
+        <span class="mini-theme-track mini-theme-track-static" aria-hidden="true">
+          <span class="mini-theme-icon mini-theme-moon">☾</span>
+          <span class="mini-theme-thumb mini-theme-thumb-static"></span>
+        </span>
       </div>
-      <div id="themeMessage" class="message"></div>
     </div>
 
     <div class="card">
@@ -126,35 +121,15 @@ mountAppShell(`
 `);
 
 const budgetMonthInput = document.getElementById("budgetMonth");
-const themeToggleInput = document.getElementById("themeToggleInput");
 budgetMonthInput.value = new Date().toISOString().slice(0, 7);
 fillCategoryOptions(document.getElementById("defaultCategory"));
 
-themeToggleInput.addEventListener("change", toggleTheme);
 document.getElementById("budgetForm").addEventListener("submit", saveBudget);
 budgetMonthInput.addEventListener("change", loadBudget);
 document.getElementById("profileForm").addEventListener("submit", saveProfileSettings);
 document.getElementById("passwordForm").addEventListener("submit", updatePassword);
 document.getElementById("exportDataButton").addEventListener("click", exportCsvData);
 document.getElementById("clearDataButton").addEventListener("click", clearAllData);
-
-async function toggleTheme() {
-  const nextTheme = themeToggleInput.checked ? "light" : "dark";
-  applyTheme(nextTheme);
-
-  try {
-    const response = await apiRequest("/auth/theme", {
-      method: "PUT",
-      body: JSON.stringify({ theme: nextTheme })
-    });
-
-    updateStoredUser(response.user);
-    showMessage("themeMessage", `Theme changed to ${nextTheme} mode.`);
-  } catch (error) {
-    themeToggleInput.checked = !themeToggleInput.checked;
-    showMessage("themeMessage", error.message, "error");
-  }
-}
 
 async function loadProfileSettings() {
   try {
@@ -167,7 +142,6 @@ async function loadProfileSettings() {
     document.getElementById("defaultCategory").value = user.defaultCategory || "Other";
     document.getElementById("notificationsEnabled").value = String(user.notificationsEnabled !== false);
     document.getElementById("autoCategoryEnabled").value = String(user.autoCategoryEnabled !== false);
-    themeToggleInput.checked = (user.theme || "dark") === "light";
     updateStoredUser(user);
   } catch (error) {
     showMessage("profileMessage", error.message, "error");
@@ -184,7 +158,7 @@ async function saveProfileSettings(event) {
     defaultCategory: document.getElementById("defaultCategory").value,
     notificationsEnabled: document.getElementById("notificationsEnabled").value === "true",
     autoCategoryEnabled: document.getElementById("autoCategoryEnabled").value === "true",
-    theme: document.body.classList.contains("light-theme") ? "light" : "dark"
+    theme: "dark"
   };
 
   try {
