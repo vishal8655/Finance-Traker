@@ -62,7 +62,17 @@ mountAppShell(`
           <strong>Dark / Light Mode</strong>
           <div class="muted">Dark mode is the default style for this app.</div>
         </div>
-        <button class="button button-secondary" id="themeToggleButton">Switch Theme</button>
+        <label class="theme-switch" for="themeToggleInput" aria-label="Toggle dark and light mode">
+          <input id="themeToggleInput" type="checkbox" />
+          <span class="theme-switch-track">
+            <span class="theme-switch-cloud theme-switch-cloud-one"></span>
+            <span class="theme-switch-cloud theme-switch-cloud-two"></span>
+            <span class="theme-switch-star theme-switch-star-one"></span>
+            <span class="theme-switch-star theme-switch-star-two"></span>
+            <span class="theme-switch-star theme-switch-star-three"></span>
+            <span class="theme-switch-knob"></span>
+          </span>
+        </label>
       </div>
       <div id="themeMessage" class="message"></div>
     </div>
@@ -119,10 +129,11 @@ mountAppShell(`
 `);
 
 const budgetMonthInput = document.getElementById("budgetMonth");
+const themeToggleInput = document.getElementById("themeToggleInput");
 budgetMonthInput.value = new Date().toISOString().slice(0, 7);
 fillCategoryOptions(document.getElementById("defaultCategory"));
 
-document.getElementById("themeToggleButton").addEventListener("click", toggleTheme);
+themeToggleInput.addEventListener("change", toggleTheme);
 document.getElementById("budgetForm").addEventListener("submit", saveBudget);
 budgetMonthInput.addEventListener("change", loadBudget);
 document.getElementById("profileForm").addEventListener("submit", saveProfileSettings);
@@ -131,7 +142,7 @@ document.getElementById("exportDataButton").addEventListener("click", exportCsvD
 document.getElementById("clearDataButton").addEventListener("click", clearAllData);
 
 async function toggleTheme() {
-  const nextTheme = document.body.classList.contains("light-theme") ? "dark" : "light";
+  const nextTheme = themeToggleInput.checked ? "light" : "dark";
   applyTheme(nextTheme);
 
   try {
@@ -143,6 +154,7 @@ async function toggleTheme() {
     updateStoredUser(response.user);
     showMessage("themeMessage", `Theme changed to ${nextTheme} mode.`);
   } catch (error) {
+    themeToggleInput.checked = !themeToggleInput.checked;
     showMessage("themeMessage", error.message, "error");
   }
 }
@@ -158,6 +170,7 @@ async function loadProfileSettings() {
     document.getElementById("defaultCategory").value = user.defaultCategory || "Other";
     document.getElementById("notificationsEnabled").value = String(user.notificationsEnabled !== false);
     document.getElementById("autoCategoryEnabled").value = String(user.autoCategoryEnabled !== false);
+    themeToggleInput.checked = (user.theme || "dark") === "light";
     updateStoredUser(user);
   } catch (error) {
     showMessage("profileMessage", error.message, "error");
